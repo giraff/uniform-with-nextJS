@@ -73,6 +73,7 @@ const ProductTable = ({ pagination, hasCheckbox, columns, data }) => {
         rowSelection={hasCheckbox ? rowSelection : null}
         columns={columns}
         dataSource={data}
+        scroll={{ y: 500 }}
       />
     </>
   );

@@ -210,10 +210,15 @@ const Incoming = () => {
         </div>
       </Card>
       {/* 입고 페이지의 제품 그리드 */}
-      <ProductTable hasCheckbox={false} columns={columns} data={data} />
+      <ProductTable
+        hasCheckbox={false}
+        columns={columns}
+        data={data}
+        pagination={false}
+      />
       {/* 제품 상세 내역 - 입고 버튼 있음 */}
       <Card
-        title="Info"
+        title="제품 상세 내역"
         size="small"
         extra={<>X</>}
         actions={[<div>입고</div>]}

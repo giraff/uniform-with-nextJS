@@ -212,7 +212,12 @@ const ProductList = () => {
         </div>
       </Card>
       {/* 제품 그리드 */}
-      <ProductTable hasCheckbox={true} columns={columns} data={data} />
+      <ProductTable
+        hasCheckbox={true}
+        columns={columns}
+        data={data}
+        pagination={false}
+      />
       {/* 제품 상세 내역 */}
       <Card title="제품 상세 내역" size="small" extra={<>X</>}>
         <Descriptions size="small">

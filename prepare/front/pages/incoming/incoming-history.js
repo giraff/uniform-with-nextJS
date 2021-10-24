@@ -1,7 +1,9 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import AppLayout from "../../components/Layouts/AppLayout";
 import ProductTable from "../../components/ProductTable";
-import { Card, Descriptions } from "antd";
+import { Card, Descriptions, DatePicker, Checkbox } from "antd";
+
+const { RangePicker } = DatePicker;
 
 const IncomingHistory = () => {
   const title = "입고 내역";
@@ -68,12 +70,16 @@ const IncomingHistory = () => {
     });
   }
   const FilterMarginBottom = useMemo(() => ({ marginBottom: 10 }), []);
+  const checkBoxMargin = useMemo(() => ({ margin: "0 10px" }), []);
+  const DateSize = useMemo(() => ({ padding: "6px 15px" }), []);
+  // 입고 날짜 / 기간 정하는 check box
+  const [isRangeDate, setIsRangeDate] = useState(false);
 
   return (
     <AppLayout title={title} subTitle={subTitle}>
       {/* <Filter /> */}
       <Card bordered={false} style={FilterMarginBottom}>
-        <div className="strong">제품 검색</div>
+        <div className="strong">입고 내역 검색</div>
         <div className="product-list-elem product-filter-form">
           <div className="product-school-search">
             <div className="form-group form-school-name">
@@ -87,6 +93,21 @@ const IncomingHistory = () => {
                 className="school-name-input"
               />
             </div>
+            <Checkbox
+              onChange={() => setIsRangeDate(!isRangeDate)}
+              checked={isRangeDate}
+              style={checkBoxMargin}
+            >
+              기간
+            </Checkbox>
+            {isRangeDate ? (
+              <RangePicker
+                style={DateSize}
+                placeholder={["조회 시작 날짜", "마지막 날짜"]}
+              />
+            ) : (
+              <DatePicker style={DateSize} placeholder={"입고 날짜"} />
+            )}
           </div>
           <div className="product-property-form">
             <div className="form-group form-school">
@@ -154,6 +175,17 @@ const IncomingHistory = () => {
               </button>
               <div className="dropdown-menu dropdown-filter hide"></div>
             </div>
+            <div className="form-group form-incoming-reason">
+              <button
+                type="button"
+                data-toggle="dropdown"
+                aria-expanded="false"
+                className="btn dropdown-toggle"
+              >
+                입고 사유
+              </button>
+              <div className="dropdown-menu dropdown-filter hide"></div>
+            </div>
           </div>
           <div className="list-filter-chips">
             <div className="chips-group">
@@ -204,7 +236,12 @@ const IncomingHistory = () => {
           </div>
         </div>
       </Card>
-      <ProductTable hasCheckbox={false} columns={columns} data={data} />
+      <ProductTable
+        hasCheckbox={false}
+        columns={columns}
+        data={data}
+        pagination={false}
+      />
       <Card title="입고 상세 내역" size="small" extra={<>X</>}>
         <Descriptions size="small">
           <Descriptions.Item label="학교명">백신</Descriptions.Item>

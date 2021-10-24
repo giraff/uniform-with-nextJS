@@ -10,13 +10,14 @@ import {
   Checkbox,
   Button,
   AutoComplete,
+  Space,
 } from "antd";
 import React, { useMemo, useState } from "react";
 import AppLayout from "../../components/Layouts/AppLayout";
 import SelectView from "../../components/SelectView";
 import { CaretRightOutlined } from "@ant-design/icons";
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 const { Option } = Select;
 
 const title = "제품 등록";
@@ -294,6 +295,16 @@ const ProductRegister = () => {
             제품 리스트
           </Title>
           <SelectView hasCheckbox={true} columns={columns} data={data} />
+          <Row justify="space-between" style={{ padding: 10 }}>
+            <Col>
+              <Space>
+                <Text strong>품목</Text> {data.length}
+              </Space>
+            </Col>
+            <Col>
+              <Button>등록</Button>
+            </Col>
+          </Row>
         </Col>
       </Row>
     </AppLayout>

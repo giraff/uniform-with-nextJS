@@ -1127,13 +1127,6 @@ img {
   border: 1.5px solid transparent;
   padding: 0px 10px;
 }
-/* .btn-remain-check {
-  border: none;
-  padding: 6px;
-  border-radius: 8px;
-  font-size: 12px;
-  cursor: pointer;
-} */
 
 /* 판매 장바구니 */
 .outcoming-basket-header {
@@ -1215,43 +1208,10 @@ img {
 }
 
 .outcoming-history-filter {
-  border-top: 1px solid #5e5e5e;
-  border-bottom: 1px solid #5e5e5e;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
   padding: 10px 0;
-}
-
-.outcoming-status {
-  display: flex;
-}
-
-.all-status,
-.sale-status,
-.exchange-status,
-.refund-status {
-  background-color: white;
-  border: 2px solid #e2e2e2;
-  border-radius: 5px;
-  text-align: center;
-  padding: 8px 10px;
-  margin: 3px;
-  color: grey;
-  cursor: pointer;
-  width: 100px;
-}
-
-.outcoming-date {
-  display: flex;
-  align-items: center;
-  padding-left: 10px;
-}
-
-.outcoming-date > * {
-  margin: 10px;
-}
-
-.outcoming-date > input {
-  /* padding: 8px 10px; */
-  border: 2px solid #cdcdcd;
+  margin-top: 5px;
 }
 
 .info-search-wrapper {
@@ -1269,162 +1229,15 @@ img {
   padding-right: 5px;
 }
 
+/*판매 내역 필터창 - 영수증 ID/ / 구매자 이름 / 구매자 번호 입력칸 */
 .info-search-wrapper > input {
   width: 80%;
   line-height: 20px;
-  padding: 8px 10px;
+  padding: 5px 10px;
   border: 2px solid #e2e2e2;
   border-radius: 3px;
-  margin: 3px;
+  margin: 5px 0;
   outline: none;
-}
-
-/* 판매 리스트 */
-.outcoming-history-grid {
-  display: flex;
-  flex-flow: column wrap;
-  border-top: 1px solid #5e5e5e;
-  border-bottom: 1px solid #5e5e5e;
-}
-
-.outcoming-history-grid > li {
-  display: grid;
-  grid-template-columns: repeat(2, 1.5fr) 1fr 1.5fr 1fr 1.5fr 3fr;
-  align-items: center;
-  padding: 10px 0;
-}
-
-.outcoming-history-grid > li:first-child {
-  padding: 15px 0px;
-}
-
-.outcoming-history-grid > li:not(:first-child) {
-  font-size: 14px;
-}
-
-.outcoming-history-grid > li:not(:last-child) {
-  border-bottom: 1px solid #cdcdcd;
-}
-
-/* 멘 마지막 컬럼 (버튼) 디자인 */
-.col-7 {
-  display: flex;
-  justify-content: center;
-}
-
-.col-7 > * {
-  cursor: pointer;
-  padding: 0px 20px;
-  /* flex-grow: 1; */
-  text-align: center;
-  line-height: 30px;
-  border: 2px solid #cdcdcd;
-  border-radius: 3px;
-  margin-left: 5px;
-}
-
-.col-done-exchange {
-  background-color: #fabe70;
-  width: 150px;
-}
-
-.col-done-refund {
-  background-color: rgb(184, 224, 241);
-  width: 150px;
-}
-
-/* 판매 상세 내역 */
-.outcoming-detail-title {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.outcoming-detail-label {
-  font-size: 18px;
-  font-weight: 900;
-  padding-right: 10px;
-}
-
-.outcoming-side-label {
-  border-radius: 3px;
-  font-size: 14px;
-  padding: 10px;
-}
-
-.side-exchange-label {
-  background-color: #fabe70;
-}
-
-.side-refund-label {
-  background-color: rgb(184, 224, 241);
-}
-.outcoming-detail-contents {
-  border-top: 2px solid #5e5e5e;
-  border-bottom: 2px solid #5e5e5e;
-}
-
-.outcoming-detail-contents > div {
-  border-bottom: 1px solid #cdcdcd;
-  padding: 10px;
-}
-
-.detail-rows {
-  display: flex;
-  flex-flow: row wrap;
-}
-
-.detail-table {
-  display: grid;
-  grid-template-columns: 6fr 2fr 3fr;
-}
-
-.detail-table:first-child {
-  border-top: 1px solid #5e5e5e;
-}
-
-.detail-rows > li {
-  display: flex;
-  align-items: center;
-  padding-right: 20px;
-}
-
-.detail-row-label {
-  font-weight: 900;
-  padding-right: 5px;
-}
-
-.detail-row-value {
-  font-size: 14px;
-}
-
-.detail-row-3 {
-  font-weight: 900;
-}
-
-.detail-row-4,
-.detail-row-5 {
-  font-size: 14px;
-}
-
-.detail-row-6 {
-  justify-content: space-between;
-  font-weight: 900;
-}
-
-.outcoming-detail-footer {
-  display: flex;
-  justify-content: flex-end;
-  padding: 5px;
-}
-
-.outcoming-detail-footer > button {
-  background-color: #fafafa;
-  padding: 6px 30px;
-  margin-left: 5px;
-  border: 2px solid #cdcdcd;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
 /* ==================================================================================== */
@@ -1635,17 +1448,6 @@ img {
   color: grey;
   cursor: pointer;
   width: 100px;
-}
-
-.group-buying-status,
-.group-buying-client {
-  margin-left: 10px;
-}
-
-.group-buying-status > button,
-.group-buying-client > button {
-  padding: 10px;
-  margin-bottom: 0;
 }
 
 .info-search {
