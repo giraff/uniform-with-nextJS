@@ -1,17 +1,55 @@
 {
-  "parserOptions": {
-    "ecmaVersion": 2020,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
+    "parserOptions": {
+        "ecmaVersion": 2020,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "parser": "babel-eslint",
+    "env": {
+        "browser": true,
+        "es2020": true,
+        "node": true,
+        "amd": true
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
+    "extends": [
+        "airbnb",
+        "eslint:recommended", // react 프레임워크에서 권장 사항
+        "plugin:react/recommended", // react 프레임워크에서 권장 사항
+        "plugin:prettier/recommended" // eslint + prettier 통합
+    ],
+    // "plugins": ["import", "react", "react-hooks", "prettier"],
+    "plugins": ["react", "prettier"],
+    "rules": {
+        "prettier/prettier": "error",
+        "react/jsx-uses-react": "error",
+        "react/jsx-uses-vars": "error",
+        "no-unused-vars": 1, // 정의 후 사용하지 않은 변수는 경고만 하기
+        "no-use-before-define": 0, // 정의 전에 사용 금지
+        "no-console": 0, // console 사용하기
+        "no-tabs": 0, // tab 사용 안되는 rule
+        "operator-linebreak": 0, // 연산자는 라인 앞쪽에 위치해야하는 rule
+        "comma-dangle": 0, // 마지막 요소에 ,를 붙여야하는 rule
+        "no-param-reassign": 2, // 파라미터는 지역변수로 받아서 쓰라는 rule
+        "import/prefer-default-export": ["off"], // export const 문을 쓸때 에러를 내는 rule 해제
+        "react/prop-types": ["off"], // props의 타입체크를 처리에 proptypes가 아닌 typescript 사용 예정
+        "react/jsx-wrap-multilines": 0, // jsx에서 여러 줄에 걸쳐서 정의할 때 복잡한 rule 해제
+        "camelcase": [0, { "ignoreGlobals": true }], // 카멜케이스아닌 변수도 허용
+        "no-restricted-syntax": ["warn", "WithStatement"], // for in 사용
+        "react/jsx-props-no-spreading": ["warn"], // props로 받은 것 바로 props로 넘기기 허용
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/react-in-jsx-scope": 0,
+        "react/jsx-one-expression-per-line": 0,
+        "no-nested-ternary": 0,
+        "react/prefer-stateless-function": 0
+    },
+    "globals": {
+        "React": "writable"
     }
-  },
-  "env": {
-    "browser": true,
-    "node": true,
-    "es6": true
-  },
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
-  "plugins": ["import", "react-hooks"],
-  "rules": {}
 }
