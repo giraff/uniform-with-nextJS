@@ -4,7 +4,6 @@ import { Table, Button, Space } from 'antd';
 
 const ProductTable = ({ pagination, hasCheckbox, columns, data }) => {
     const [loading, setLoading] = useState(false);
-    const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
     // reload
     const start = useCallback(() => {
@@ -15,13 +14,12 @@ const ProductTable = ({ pagination, hasCheckbox, columns, data }) => {
         }, 1000);
     }, []);
 
-    // 선택한 행 배열
+    // table 선택
+    const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const onSelectChange = useCallback(selectedRowKeys => {
         console.log('selectedRowKeys Changed: ', ...selectedRowKeys);
         setSelectedRowKeys([...selectedRowKeys]);
     }, []);
-
-    // Table에 추가한 프로퍼티
     const rowSelection = {
         selectedRowKeys,
         onChange: onSelectChange,

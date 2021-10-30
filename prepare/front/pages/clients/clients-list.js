@@ -35,8 +35,10 @@ const ClientsList = () => {
 
     const onFindSchool = () => {
         var subListData = [];
+        console.log('원본 값 ');
+        console.log(resultListData);
         if (radioList == '중학교') {
-            resultListData.map(key => {
+            listData.map(key => {
                 if (key.schoolDivide.includes('MIDDLE')) {
                     subListData.push(key);
                 }
@@ -44,7 +46,7 @@ const ClientsList = () => {
             });
             setResultListData(subListData);
         } else if (radioList == '고등학교') {
-            resultListData.map(key => {
+            listData.map(key => {
                 if (key.schoolDivide.includes('HIGH')) {
                     subListData.push(key);
                 }
@@ -58,6 +60,7 @@ const ClientsList = () => {
 
     const onFindCommonPurchase = () => {
         var subListData = [];
+        var tempListData = resultListData;
         if (selectBoxList == 'O') {
             resultListData.map(key => {
                 if (key.schoolDivide.includes('MIDDLE')) {
@@ -78,13 +81,17 @@ const ClientsList = () => {
             selectBoxList == '공동 구매 대상 여부' ||
             selectBoxList == 'default'
         ) {
-            setResultListData(listData);
+            setResultListData(tempListData);
         }
     };
 
     const onChange = e => {
         setRadioList(e.target.value);
         console.log(e.target.value);
+    };
+
+    const onSelectChange = e => {
+        setSelectBoxList(e.target.value);
     };
 
     // const onChange = useCallback(list => {
@@ -100,14 +107,13 @@ const ClientsList = () => {
     // }, []);
 
     const onDetailClick = index => {
-        axios.get(`/sales-target-mybatis/list/${index}`, {}).then(res => {
+        axios.get(`/sales-target/list/${index}`, {}).then(res => {
             if (res != null) {
                 setDetailData(res.data);
                 setDetailCheck(true);
                 console.log(detailData);
                 console.log('찍어내나요');
                 console.log(listData);
-                onFindSchool();
             }
         });
     };
@@ -153,7 +159,7 @@ const ClientsList = () => {
     ];
 
     useEffect(() => {
-        axios.get('/sales-target-mybatis/list', {}).then(res => {
+        axios.get('/sales-target/list', {}).then(res => {
             setListData(res.data);
             setResultListData(res.data);
         });
@@ -161,8 +167,10 @@ const ClientsList = () => {
 
     useEffect(() => {
         console.log(radioList);
+        setResultListData(listData);
         setDetailCheck(false);
         onFindSchool();
+        onFindCommonPurchase();
     }, [radioList]);
 
     // BackEnd -> FrontEnd 로 넘어오는 데이터 형식 List<TargetInfo> [판매대상 전체조회]
@@ -277,6 +285,7 @@ const ClientsList = () => {
                             <Select
                                 defaultValue="공동 구매 대상 여부"
                                 style={{ width: 180 }}
+                                onChange={onSelectChange}
                             >
                                 <Option value="O">O</Option>
                                 <Option value="X">X</Option>

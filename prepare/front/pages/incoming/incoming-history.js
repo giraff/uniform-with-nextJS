@@ -1,9 +1,18 @@
 import React, { useMemo, useState, useCallback } from 'react';
 import AppLayout from '../../components/Layouts/AppLayout';
 import ProductTable from '../../components/ProductTable';
-import { Card, Table, Descriptions, DatePicker, Checkbox } from 'antd';
-// import { Table, Button, Space } from 'antd';
+import {
+    Card,
+    Table,
+    Descriptions,
+    DatePicker,
+    Checkbox,
+    Typography,
+    Divider,
+} from 'antd';
+import { CloseOutlined } from '@ant-design/icons';
 
+const { Title } = Typography;
 const { RangePicker } = DatePicker;
 
 const title = '입고 내역';
@@ -57,7 +66,7 @@ const data = [];
 for (let i = 0; i < 46; i++) {
     data.push({
         key: i,
-        schoolname: `백신`,
+        schoolname: `백신${i}`,
         schoolcategory: `고등학교`,
         seasons: `하계`,
         gender: '여',
@@ -69,17 +78,24 @@ for (let i = 0; i < 46; i++) {
         incomingAmount: 30,
     });
 }
+
 const IncomingHistory = () => {
-    const FilterMarginBottom = useMemo(() => ({ marginBottom: 10 }), []);
-    const checkBoxMargin = useMemo(() => ({ margin: '0 10px' }), []);
-    const DateSize = useMemo(() => ({ padding: '6px 15px' }), []);
-    // 입고 날짜 / 기간 정하는 check box
     const [isRangeDate, setIsRangeDate] = useState(false);
+    const [productDesc, setProductDesc] = useState(null);
+    const [descOpened, setDescOpened] = useState(false);
+    const onClickRow = useCallback(
+        data => {
+            setProductDesc(data);
+            setDescOpened(true);
+            console.log(data);
+        },
+        [descOpened, productDesc],
+    );
 
     return (
         <AppLayout title={title} subTitle={subTitle}>
             {/* <Filter /> */}
-            <Card bordered={false} style={FilterMarginBottom}>
+            <Card bordered={false} style={{ marginBottom: 10 }}>
                 <div className="strong">입고 내역 검색</div>
                 <div className="product-list-elem product-filter-form">
                     <div className="product-school-search">
@@ -97,18 +113,18 @@ const IncomingHistory = () => {
                         <Checkbox
                             onChange={() => setIsRangeDate(!isRangeDate)}
                             checked={isRangeDate}
-                            style={checkBoxMargin}
+                            style={{ margin: '0 10px' }}
                         >
                             기간
                         </Checkbox>
                         {isRangeDate ? (
                             <RangePicker
-                                style={DateSize}
+                                style={{ margin: '0 10px' }}
                                 placeholder={['조회 시작 날짜', '마지막 날짜']}
                             />
                         ) : (
                             <DatePicker
-                                style={DateSize}
+                                style={{ margin: '0 10px' }}
                                 placeholder={'입고 날짜'}
                             />
                         )}
@@ -243,7 +259,7 @@ const IncomingHistory = () => {
             <Table
                 onRow={record => {
                     return {
-                        onClick: () => console.log('Hello', record),
+                        onClick: () => onClickRow(record),
                     };
                 }}
                 size="small"
@@ -252,27 +268,48 @@ const IncomingHistory = () => {
                 columns={columns}
                 dataSource={data}
                 scroll={{ y: 500 }}
+                style={{ marginBottom: 20 }}
             />
-            <Card title="입고 상세 내역" size="small" extra={<>X</>}>
-                <Descriptions size="small">
-                    <Descriptions.Item label="학교명">백신</Descriptions.Item>
-                    <Descriptions.Item label="학교 구분">
-                        고등학교
-                    </Descriptions.Item>
-                    <Descriptions.Item label="계절">하계</Descriptions.Item>
-                    <Descriptions.Item label="성별">여</Descriptions.Item>
-                    <Descriptions.Item label="종류">셔츠</Descriptions.Item>
-                    <Descriptions.Item label="사이즈">XL</Descriptions.Item>
-                    <Descriptions.Item label="상태">신상</Descriptions.Item>
-                    <Descriptions.Item label="입고 사유">
-                        정기 입고
-                    </Descriptions.Item>
-                    <Descriptions.Item label="입고 날짜">
-                        2021.08.12 12:00:12
-                    </Descriptions.Item>
-                    <Descriptions.Item label="입고 수량">30</Descriptions.Item>
-                </Descriptions>
-            </Card>
+            {descOpened ? (
+                <>
+                    <Card
+                        title="입고 상세 내역"
+                        size="small"
+                        extra={
+                            <div
+                                style={{ cursor: 'pointer' }}
+                                onClick={() => setDescOpened(false)}
+                            >
+                                <CloseOutlined />
+                            </div>
+                        }
+                    >
+                        <Typography style={{ marginBottom: 10 }}>
+                            {productDesc.incomingReason} /{' '}
+                            {productDesc.incomingDate}
+                        </Typography>
+
+                        <Descriptions size="small">
+                            <Descriptions.Item label="PID">
+                                {productDesc?.key}
+                            </Descriptions.Item>
+                            <Descriptions.Item label="제품명">
+                                {productDesc?.schoolname}/
+                                {productDesc?.schoolcategory}/
+                                {productDesc?.seasons}/{productDesc?.gender}/
+                                {productDesc?.category}/{productDesc?.size}/
+                                {productDesc?.status}
+                            </Descriptions.Item>
+                            <Descriptions.Item label="재고 변동">
+                                0 {`-> ${productDesc?.incomingAmount}`}
+                            </Descriptions.Item>
+                            <Descriptions.Item label="입고 수량">
+                                {productDesc?.incomingAmount}
+                            </Descriptions.Item>
+                        </Descriptions>
+                    </Card>
+                </>
+            ) : null}
         </AppLayout>
     );
 };
